@@ -1,0 +1,42 @@
+#The question (number 23 in the archive):
+
+#A perfect number is a number for which the sum of its proper divisors is exactly equal to the number. For example, the sum of the proper divisors of 28 would be 1 + 2 + 4 + 7 + 14 = 28, which means that 28 is a perfect number.
+#A number n is called deficient if the sum of its proper divisors is less than n and it is called abundant if this sum exceeds n.
+#As 12 is the smallest abundant number, 1 + 2 + 3 + 4 + 6 = 16, the smallest number that can be written as the sum of two abundant numbers is 24. By mathematical analysis, it can be shown that all integers greater than 28123 can be written as the sum of two abundant numbers. However, this upper limit cannot be reduced any further by analysis even though it is known that the greatest number that cannot be expressed as the sum of two abundant numbers is less than this limit.
+#Find the sum of all the positive integers which cannot be written as the sum of two abundant numbers.
+
+#My code (python):
+#The loop between lines 26 and 35 seems to be going on indefinitely
+
+def pd(x):   #returns sum of all proper divisors
+    c = 1
+    for i in range(2, x / 2 + 1):             #proper divisors of a natural number n cannot exceed n/2
+        if x % i == 0:
+	    c += i
+    return c
+
+abundant = []           #array of all abundant numbers between 1 and 28123
+
+for i in range(1, 28124):
+    if pd(i) > i:	
+	abundant.append(i)
+
+arr = []
+
+for x in range(1, 28124):
+    for y in range(len(abundant)):
+	      Flag = False
+        for z in range(len(abundant)):
+	          if x == abundant[y] + abundant[z]:
+		            arr.append(x)                       #arr will contain all numbers < 28123 which CAN BE written as the sum of two abundant numbers
+		            Flag = True
+		            break
+        if Flag == True:
+            break
+
+sum = 0
+for i in range(len(arr)):                #sum of elements of arr (wasn't able to sum it as a numpy array :p)
+    sum += arr[i]
+
+t = 28123 * 28124 / 2                   #sum of ALL natural nos from 1 to 28123
+print (t - sum)
