@@ -9,4 +9,4 @@ def py(n):
 			print (i, j, int(k))
 			return
 
-py(1000)
+py(1000)	#arbitrarily chosen argument. Chossing smaller will make the program quite faster, but it must not be less than 375
